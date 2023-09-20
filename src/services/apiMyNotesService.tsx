@@ -7,7 +7,7 @@ class ApiMyNotesService {
 
     constructor(user: UserItem) {
         this.apiMyNotes = axios.create({
-            baseURL: 'https://localhost:7032',
+            baseURL: 'https://my-notes-mc-7fee2f4c1588.herokuapp.com',
             withCredentials: false,
             headers: {
                 'Content-Type': 'application/json',
