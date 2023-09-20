@@ -1,8 +1,8 @@
 {
-  "proxy": "https://chotsourianmarcos.github.io/my-notes-frontend",
+  "proxy": "https://my-notes-mc-frontend-a0fc6ad0aa34.herokuapp.com",
   "name": "frontend",
   "version": "0.1.0",
-  "homepage": "https://chotsourianmarcos.github.io/my-notes-frontend",
+  "homepage": "https://my-notes-mc-frontend-a0fc6ad0aa34.herokuapp.com",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
@@ -26,7 +26,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "main -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
