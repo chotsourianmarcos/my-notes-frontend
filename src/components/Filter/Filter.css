@@ -1,0 +1,21 @@
+.filter__contnr{
+    padding: 1.5px 3px 1.5px 3px;
+    border: 0.5px solid black;
+    border-radius: 5%;
+    margin: 5px;
+}
+
+.filter__lbl{
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.filter__isActive{
+    background-color: #f8fff0;
+    color: black;
+}
+
+.filter__isInactive{
+    background-color: #89957d;
+    color: white;
+}

@@ -1,0 +1,19 @@
+#Header__contnr {
+    display: flex;
+    min-width: 100%;
+}
+
+#Header__signature{
+    margin-left: 40px;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 900;
+    font-size: xx-large;
+}
+
+#Header__title{
+    flex-direction: column;
+    width: 70%;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 300;
+    font-size: x-large;
+}

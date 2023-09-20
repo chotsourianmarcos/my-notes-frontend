@@ -1,0 +1,8 @@
+#Register__form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    flex-grow: 1;
+    max-width:fit-content;
+    padding: 10px 10px 10px 10px;
+}
