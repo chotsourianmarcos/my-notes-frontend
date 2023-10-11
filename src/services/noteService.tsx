@@ -12,59 +12,32 @@ class NoteService extends ApiMyNotesSercice {
 
     async getNotesByCriteria(params: GetNotesByCriteriaRequest): Promise<NoteItem[]> {
         let queryString = "?userIdWeb=" + params.userIdWeb + "&tagsIncluded=" + params.tagsIncluded + "&isArchived=" + params.isArchived;
+        
         functions.awaitCursor();
-        return await this.apiMyNotes.get("/Note/GetNotesByCriteria" + queryString).then(
-            (response: any) => {
-                functions.defaultCursor();
-                return response.data;
-            },
-            (error: any) => {
-                functions.defaultCursor();
-                throw error;
-            }
-        );
+        let result = await this.apiMyNotes.get("/Note/GetNotesByCriteria" + queryString);
+        functions.defaultCursor();
+        return result;
     };
 
     async addNote(requestData: AddUpdateNoteRequest): Promise<void> {
         functions.awaitCursor();
-        return await this.apiMyNotes.post("/Note/AddNote", JSON.stringify(requestData)).then(
-            (response: any) => {
-                functions.defaultCursor();
-                return response.data;
-            },
-            (error: any) => {
-                functions.defaultCursor();
-                throw error;
-            }
-        );
+        let result = await this.apiMyNotes.post("/Note/AddNote", JSON.stringify(requestData));
+        functions.defaultCursor();
+        return result;
     };
 
     async updateNote(requestData: AddUpdateNoteRequest): Promise<void> {
         functions.awaitCursor();
-        return await this.apiMyNotes.patch("/Note/UpdateNote", JSON.stringify(requestData)).then(
-            (response: any) => {
-                functions.defaultCursor();
-                return response.data;
-            },
-            (error: any) => {
-                functions.defaultCursor();
-                throw error;
-            }
-        );
+        let result = await this.apiMyNotes.patch("/Note/UpdateNote", JSON.stringify(requestData));
+        functions.defaultCursor();
+        return result;
     };
 
     async deleteNote(idWeb: string): Promise<void> {
         functions.awaitCursor();
-        return await this.apiMyNotes.delete("/Note/DeleteNote" + "?idWeb=" + idWeb).then(
-            (response: any) => {
-                functions.defaultCursor();
-                return response.data;
-            },
-            (error: any) => {
-                functions.defaultCursor();
-                throw error;
-            }
-        );
+        let result = await this.apiMyNotes.delete("/Note/DeleteNote" + "?idWeb=" + idWeb);
+        functions.defaultCursor();
+        return result;
     };
 
 }

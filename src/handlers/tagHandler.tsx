@@ -17,7 +17,7 @@ class TagHandler {
     }
 
     async getAllTags(): Promise<string[]> {
-        return this.tagService.getAllTags();
+        return await this.tagService.getAllTags();
     }
     
 }

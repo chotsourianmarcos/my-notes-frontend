@@ -10,16 +10,9 @@ class TagService extends ApiMyNotesSercice {
 
     async getAllTags(): Promise<string[]> {
         functions.awaitCursor();
-        return await this.apiMyNotes.get("/Tag/GetAllTags").then(
-            (response: any) => {
-                functions.defaultCursor();
-                return response.data;
-            },
-            (error: any) => {
-                functions.defaultCursor();
-                throw error;
-            }
-        );
+        let result = await this.apiMyNotes.get("/Tag/GetAllTags");
+        functions.defaultCursor();
+        return result;
     };
 
 }

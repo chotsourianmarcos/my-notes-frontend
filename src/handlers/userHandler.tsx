@@ -26,7 +26,7 @@ class UserHandler {
         requestData.userEmail = formData.userEmail;
         requestData.userPassword = formData.userPassword;
 
-        return this.userService.register(requestData);
+        return await this.userService.register(requestData);
     }
 
     async login(formData:LoginFormData):Promise<LoginResponseData> {
@@ -36,7 +36,7 @@ class UserHandler {
         requestData.userEmail = formData.userEmail;
         requestData.userPassword = formData.userPassword;
 
-        return this.userService.login(requestData);
+        return await this.userService.login(requestData);
     }
 }
 

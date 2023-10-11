@@ -7,29 +7,16 @@ class UserService extends ApiMyNotesSercice {
 
     async register(requestData: RegisterRequestData): Promise<void> {
         functions.awaitCursor();
-        await this.apiMyNotes.post("/User/Register", JSON.stringify(requestData)).then(
-            (response: any) => {
-                functions.defaultCursor();
-                return response.data;
-            },
-            (error: any) => {
-                functions.defaultCursor();
-                throw error;
-            }
-        );
+        let result = await this.apiMyNotes.post("/User/Register", JSON.stringify(requestData));
+        functions.defaultCursor();
+        return result;
     };
 
     async login(requestData: LoginRequestData): Promise<LoginResponseData> {
         functions.awaitCursor();
-        return await this.apiMyNotes.post("/User/Login", JSON.stringify(requestData)).then(
-            (response: any) => {
-                functions.defaultCursor();
-                return response.data;
-            },
-            (error: any) => {
-                functions.defaultCursor();
-                throw error;
-            });
+        let result = await this.apiMyNotes.post("/User/Login", JSON.stringify(requestData));
+        functions.defaultCursor();
+        return result;
     };
 
 }

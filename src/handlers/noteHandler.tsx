@@ -37,7 +37,7 @@ class NoteHandler {
             }
         }
         requestData.isArchived = filter.isArchived;
-        return this.noteService.getNotesByCriteria(requestData);
+        return await this.noteService.getNotesByCriteria(requestData);
     }
 
     async addUpdateNote(noteItem: NoteItem): Promise<void> {
@@ -52,14 +52,14 @@ class NoteHandler {
         let isNew = (noteItem.idWeb === '' || noteItem.idWeb === null || noteItem.idWeb === undefined) ? true : false;
 
         if (isNew) {
-            return this.noteService.addNote(requestData);
+            return await this.noteService.addNote(requestData);
         } else {
-            return this.noteService.updateNote(requestData);
+            return await this.noteService.updateNote(requestData);
         }
     }
 
     async deleteNote(idWeb: string): Promise<void> {
-        return this.noteService.deleteNote(idWeb);
+        return await this.noteService.deleteNote(idWeb);
     }
     
 }
