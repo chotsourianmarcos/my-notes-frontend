@@ -62,16 +62,23 @@ function Filter(props: FilterProps) {
         }
     }
 
+    const noFiltersAppliedMessage = (
+        <label className='hor-ver-center-cnt'>Click on any amount of filters to get a specific subset of notes.</label>
+    )
+
     return (
-        <div className='hor-ver-center-cnt'>
-            {allFilters.map((f: string) => (
-                <div key={allFilters.indexOf(f)}>
-                    <div className={setActiveClass(f, 'filter__contnr')}>
-                        <label className={setActiveClass(f, 'filter__lbl')} id={f} onClick={toggleFilter}>{f}</label>
+        <>
+            <div className='hor-ver-center-cnt'>
+                {allFilters.map((f: string) => (
+                    <div key={allFilters.indexOf(f)}>
+                        <div className={setActiveClass(f, 'filter__contnr')}>
+                            <label className={setActiveClass(f, 'filter__lbl')} id={f} onClick={toggleFilter}>{f}</label>
+                        </div>
                     </div>
-                </div>
-            ))}
-        </div>
+                ))}
+            </div>
+            {filters.length == 0 ? noFiltersAppliedMessage : null}
+        </>
     );
 };
 
