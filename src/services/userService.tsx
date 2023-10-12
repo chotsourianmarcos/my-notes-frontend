@@ -9,14 +9,14 @@ class UserService extends ApiMyNotesSercice {
         functions.awaitCursor();
         let result = await this.apiMyNotes.post("/User/Register", JSON.stringify(requestData));
         functions.defaultCursor();
-        return result;
+        return result.data;
     };
 
     async login(requestData: LoginRequestData): Promise<LoginResponseData> {
         functions.awaitCursor();
         let result = await this.apiMyNotes.post("/User/Login", JSON.stringify(requestData));
         functions.defaultCursor();
-        return result;
+        return result.data;
     };
 
 }

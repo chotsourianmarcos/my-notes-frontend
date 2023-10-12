@@ -16,28 +16,28 @@ class NoteService extends ApiMyNotesSercice {
         functions.awaitCursor();
         let result = await this.apiMyNotes.get("/Note/GetNotesByCriteria" + queryString);
         functions.defaultCursor();
-        return result;
+        return result.data;
     };
 
     async addNote(requestData: AddUpdateNoteRequest): Promise<void> {
         functions.awaitCursor();
         let result = await this.apiMyNotes.post("/Note/AddNote", JSON.stringify(requestData));
         functions.defaultCursor();
-        return result;
+        return result.data;
     };
 
     async updateNote(requestData: AddUpdateNoteRequest): Promise<void> {
         functions.awaitCursor();
         let result = await this.apiMyNotes.patch("/Note/UpdateNote", JSON.stringify(requestData));
         functions.defaultCursor();
-        return result;
+        return result.data;
     };
 
     async deleteNote(idWeb: string): Promise<void> {
         functions.awaitCursor();
         let result = await this.apiMyNotes.delete("/Note/DeleteNote" + "?idWeb=" + idWeb);
         functions.defaultCursor();
-        return result;
+        return result.data;
     };
 
 }

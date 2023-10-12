@@ -12,7 +12,7 @@ class TagService extends ApiMyNotesSercice {
         functions.awaitCursor();
         let result = await this.apiMyNotes.get("/Tag/GetAllTags");
         functions.defaultCursor();
-        return result;
+        return result.data;
     };
 
 }
