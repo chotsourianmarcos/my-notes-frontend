@@ -1,10 +1,11 @@
 class UserItem {
 
-  userIdWeb: string = "";
   userName: string = "";
+  userIdWeb: string = "";
+  userRol: string = "";
   accessToken: string = "";
-  idRol: string = "";
-
+  refreshToken: string = "";
+  
 }
 
 export default UserItem;

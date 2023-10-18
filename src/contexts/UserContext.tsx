@@ -36,10 +36,12 @@ const UserContextProvider: FC<Props> = ({ children }) => {
         user: user,
         setUserData: (logData:LoginResponseData) => {
             let user = new UserItem();
-            user.userIdWeb = logData.userIdWeb;
             user.userName = logData.userName;
+            user.userIdWeb = logData.userIdWeb;
+            user.userRol = logData.userRol;
             user.accessToken = logData.accessToken;
-            user.idRol = logData.idRol;
+            user.refreshToken = logData.refreshToken;
+            
             setUser(user);
         }
     };
