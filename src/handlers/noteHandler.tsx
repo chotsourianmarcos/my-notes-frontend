@@ -5,7 +5,6 @@ import UserItem from "../models/entities/userItem";
 import { AddUpdateNoteRequest, GetNotesByCriteriaRequest } from "../models/requests/noteRequests";
 
 class NoteHandler {
-
     user: UserItem;
     noteService: NoteService;
 
@@ -41,7 +40,6 @@ class NoteHandler {
     }
 
     async addUpdateNote(noteItem: NoteItem): Promise<void> {
-
         let requestData = new AddUpdateNoteRequest();
         requestData.noteIdWeb = noteItem.idWeb;
         requestData.userIdWeb = this.user.userIdWeb;
@@ -61,7 +59,6 @@ class NoteHandler {
     async deleteNote(idWeb: string): Promise<void> {
         return await this.noteService.deleteNote(idWeb);
     }
-    
 }
 
 export default NoteHandler;

@@ -4,13 +4,12 @@ import { UserContext } from '../../contexts/UserContext';
 import Filter from '../Filter/Filter';
 import Note from '../Note/Note';
 import AddUpdateNoteModal from '../AddUpdateNoteModal/AddUpdateNoteModal';
-import NoteHandler from '../../handlers/noteHandler';
-import NoteItem from '../../models/entities/noteItem';
 import NoteFilter from '../../models/filters/noteFilter';
+import NoteItem from '../../models/entities/noteItem';
+import NoteHandler from '../../handlers/noteHandler';
 import { AlertContext } from '../../contexts/AlertContext';
 
 function Notes() {
-
   const { setAlertContext } = useContext(AlertContext);
   const { user } = useContext(UserContext);
   const noteHandler = new NoteHandler(user);
@@ -100,6 +99,7 @@ function Notes() {
           });
       });
   }
+
   const openModal = (noteItem: NoteItem) => {
     if (noteItem.idWeb == "") {
       setModalState(newNoteModalState);
@@ -130,6 +130,7 @@ function Notes() {
       setModalState(defaultModalState);
     }
   };
+  
   const createNewNote = () => {
     openModal(new NoteItem);
   }

@@ -6,7 +6,6 @@ import {LoginRequestData, RegisterRequestData} from "../models/requests/userRequ
 import LoginResponseData from "../models/responses/loginResponseData";
 
 class UserHandler {
-
     user:UserItem;
     userService:UserService;
 
@@ -20,7 +19,6 @@ class UserHandler {
     }
 
     async register(formData:RegisterFormData):Promise<void> {
-
         let requestData = new RegisterRequestData();
         requestData.userName = formData.userName;
         requestData.userEmail = formData.userEmail;
@@ -30,7 +28,6 @@ class UserHandler {
     }
 
     async login(formData:LoginFormData):Promise<LoginResponseData> {
-
         let requestData = new LoginRequestData();
         requestData.userName = formData.userName;
         requestData.userEmail = formData.userEmail;

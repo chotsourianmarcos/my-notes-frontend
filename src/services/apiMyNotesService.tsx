@@ -1,5 +1,6 @@
 import axios from "axios";
 import UserItem from "../models/entities/userItem";
+import functions from "../resources/functions";
 
 class ApiMyNotesService {
 
@@ -15,8 +16,20 @@ class ApiMyNotesService {
                 Authorization: "Bearer " + user.refreshToken
             }
         });
-        service.interceptors.response.use((response) => response, (error) => {
-            // whatever you want to do with the error
+        service.interceptors.request.use(function (config) {
+            functions.awaitCursor();
+            return config;
+          }, function (error) {
+            functions.defaultCursor();
+            return Promise.reject(error);
+          });
+        service.interceptors.response.use(
+            (response) => {
+                functions.defaultCursor();
+                return response;
+            },
+            (error) => {
+            functions.defaultCursor();
             if(error.response.data.ReasonPhrase.includes('Expired token')){
                 console.log("asdasdasd");   
             };

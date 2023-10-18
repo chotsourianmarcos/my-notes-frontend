@@ -8,7 +8,6 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Login() {
-
   const { setAlertContext } = useContext(AlertContext);
   const { setLogActive, setUserData, user } = useContext(UserContext);
 
@@ -39,6 +38,7 @@ function Login() {
     }
     return true;
   }
+  
   const handleChange = (event: any) => {
     const name = event.target.name;
     const value = event.target.value;

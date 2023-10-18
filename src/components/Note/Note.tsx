@@ -1,7 +1,7 @@
 import './Note.css';
-import NoteItem from '../../models/entities/noteItem';
 import { useContext } from 'react';
 import { AlertContext } from '../../contexts/AlertContext';
+import NoteItem from '../../models/entities/noteItem';
 
 type NoteProps = {
     key: number;
@@ -12,7 +12,6 @@ type NoteProps = {
 }
 
 function Note(props: NoteProps) {
-
     const { setAlertContext } = useContext(AlertContext);
 
     let tagListString = "";
@@ -44,6 +43,7 @@ function Note(props: NoteProps) {
                 }
             });
     }
+
     function deleteNote() {
         props.deleteNote(props.noteItem.idWeb);
     }

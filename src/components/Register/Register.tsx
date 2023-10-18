@@ -1,11 +1,10 @@
 import './Register.css';
 import { useContext, useEffect, useState } from 'react';
+import { AlertContext } from '../../contexts/AlertContext';
 import UserHandler from '../../handlers/userHandler';
 import RegisterFormData from '../../models/forms/registerFormData';
-import { AlertContext } from '../../contexts/AlertContext';
 
 function Register() {
-
   const { setAlertContext } = useContext(AlertContext);
   const userHandler = new UserHandler();
 

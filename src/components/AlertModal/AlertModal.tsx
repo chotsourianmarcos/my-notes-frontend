@@ -4,7 +4,6 @@ import { AlertContext } from '../../contexts/AlertContext';
 import { AlertModalProps } from '../../models/types/alertModalProps';
 
 function AlertModal(props: AlertModalProps) {
-
     const { setAlertContext } = useContext(AlertContext);
 
     if (!props.isOpen) return null;
@@ -18,12 +17,10 @@ function AlertModal(props: AlertModalProps) {
                 onClose(accept: boolean) { }
             });
     }
-
     function closeModal() {
         props.onClose(false);
         resetModal();
     }
-
     function confirm() {
         props.onClose(true);
         resetModal();

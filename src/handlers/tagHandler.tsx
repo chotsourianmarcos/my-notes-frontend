@@ -1,9 +1,8 @@
 
-import UserItem from "../models/entities/userItem";
 import TagService from "../services/tagService";
+import UserItem from "../models/entities/userItem";
 
 class TagHandler {
-
     user: UserItem;
     tagService: TagService;
 
@@ -19,7 +18,6 @@ class TagHandler {
     async getAllTags(): Promise<string[]> {
         return await this.tagService.getAllTags();
     }
-    
 }
 
 export default TagHandler;

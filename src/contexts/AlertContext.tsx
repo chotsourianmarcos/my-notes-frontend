@@ -23,7 +23,6 @@ interface Props {
 }
 
 const AlertContextProvider: FC<Props> = ({ children }) => {
-
     const [modalValues, setAlertContext] = useState(new DefaultAlertContext().modalValues);
 
     const value = {

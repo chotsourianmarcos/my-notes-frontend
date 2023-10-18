@@ -1,8 +1,8 @@
 import './Filter.css';
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
+import { AlertContext } from '../../contexts/AlertContext';
 import { UserContext } from '../../contexts/UserContext';
 import TagHandler from '../../handlers/tagHandler';
-import { AlertContext } from '../../contexts/AlertContext';
 
 type FilterProps = {
     defaultFilters: string[];
@@ -11,7 +11,6 @@ type FilterProps = {
 }
 
 function Filter(props: FilterProps) {
-
     const { setAlertContext } = useContext(AlertContext);
     const { user } = useContext(UserContext);
     const tagHandler = new TagHandler(user);

@@ -14,7 +14,6 @@ type AddUpdateNoteModalProps = {
 }
 
 function AddUpdateNoteModal(props: AddUpdateNoteModalProps) {
-
   const { setAlertContext } = useContext(AlertContext);
 
   const [noteItem, setNoteItem] = useState(new NoteItem());
@@ -45,8 +44,6 @@ function AddUpdateNoteModal(props: AddUpdateNoteModalProps) {
       setNoteItem(props.modalState.noteItem);
     }
   }, [props.modalState.noteItem]);
-
-  
 
   if (!props.modalState.isOpen) return null;
 
@@ -135,10 +132,6 @@ function AddUpdateNoteModal(props: AddUpdateNoteModalProps) {
       return tag;
     });
     props.onClose(true, noteItem);
-    setFormData(new AddUpdateNoteFormData(new NoteItem));
-  }
-
-  const clearForm = () => {
     setFormData(new AddUpdateNoteFormData(new NoteItem));
   }
 

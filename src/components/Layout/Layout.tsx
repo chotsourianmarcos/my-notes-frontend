@@ -1,13 +1,13 @@
 import './Layout.css';
+import { useContext } from 'react';
+import { AlertContext } from '../../contexts/AlertContext';
 import Header from "./Header/Header";
 import Nav from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
-import { AlertContext } from '../../contexts/AlertContext';
 import AlertModal from '../AlertModal/AlertModal';
-import { useContext } from 'react';
+
 
 function Layout() {
-
   const { modalValues } = useContext(AlertContext);
   
   return (
