@@ -1,5 +1,5 @@
 import './Filter.css';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AlertContext } from '../../contexts/AlertContext';
 import { UserContext } from '../../contexts/UserContext';
 import TagHandler from '../../handlers/tagHandler';
@@ -7,7 +7,7 @@ import TagHandler from '../../handlers/tagHandler';
 type FilterProps = {
     defaultFilters: string[];
     updateFilters: boolean;
-    refreshSearch: (filters: string[]) => void;
+    refreshFilters: (filters: string[]) => void;
 }
 
 function Filter(props: FilterProps) {
@@ -18,22 +18,29 @@ function Filter(props: FilterProps) {
     const [filters, setFilters] = useState(props.defaultFilters);
     const [allFilters, setAllFilters] = useState([] as string[]);
 
-    if (props.updateFilters) {
-        tagHandler.getAllTags().then(
-            (value: any) => {
-                setAllFilters([...value, 'archived']);
-            },
-            (error: any) => {
-                setAlertContext(
-                    {
-                        isOpen: true,
-                        modalText: error.response.data.message.result,
-                        isConfirm: false,
-                        onClose(accept: boolean) { }
-                    });
-            }
-        )
-    }
+    useEffect(() => {
+        if (props.updateFilters) {
+            tagHandler.getAllTags().then(
+                (value: any) => {
+                    let newAllFilters: string[] = [...value, 'archived'];
+                    setAllFilters(newAllFilters);
+                    let newFilters = [...filters, ...newAllFilters.filter((f: string) => !allFilters.includes(f))];
+                    setFilters(newFilters);
+                    props.refreshFilters(newFilters);
+                },
+                (error: any) => {
+                    setAlertContext(
+                        {
+                            isOpen: true,
+                            modalText: error.response.data.message.result,
+                            isConfirm: false,
+                            onClose(accept: boolean) { }
+                        });
+                }
+            )
+        }
+    }, [props.updateFilters]);
+
 
     const toggleFilter = (event: any) => {
         const value = event.target.id;
@@ -50,7 +57,7 @@ function Filter(props: FilterProps) {
             newFilters.push(value);
             setFilters(newFilters);
         }
-        props.refreshSearch(newFilters);
+        props.refreshFilters(newFilters);
     }
 
     const setActiveClass = (filter: string, className: string) => {

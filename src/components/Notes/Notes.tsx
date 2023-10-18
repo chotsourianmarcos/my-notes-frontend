@@ -22,8 +22,6 @@ function Notes() {
     isOpen: true,
     noteItem: new NoteItem()
   };
-  const defaultFilter = new NoteFilter();
-  defaultFilter.userIdWeb = user.userIdWeb;
 
   function updateModalState(noteItem: NoteItem) {
     return {
@@ -32,18 +30,17 @@ function Notes() {
     }
   }
 
-  const [notesLoaded, setNotesLoaded] = useState(false);
   const [notes, setNotes] = useState([] as NoteItem[]);
-  const [filter, setFilter] = useState(defaultFilter);
+  const [notesLoaded, setNotesLoaded] = useState(false);
+  const [filter, setFilter] = useState(new NoteFilter());
   const [updateFilters, setUpdateFilters] = useState(true);
   const [modalState, setModalState] = useState(defaultModalState);
 
-  if (!notesLoaded && filter.userIdWeb) {
+  if (!notesLoaded && !updateFilters) {
     noteHandler.getNotesByCriteria(filter).then(
       (value: NoteItem[]) => {
         setNotesLoaded(true);
         setNotes(value);
-        setUpdateFilters(false);
       },
       (error: any) => {
         setNotesLoaded(false);
@@ -143,6 +140,7 @@ function Notes() {
     filter.userIdWeb = user.userIdWeb;
     setFilter(filter);
     setNotesLoaded(false);
+    setUpdateFilters(false);
   }
 
   const alertNote = (header: string, content: string, onClick: any) => (
@@ -176,7 +174,7 @@ function Notes() {
   return (
     <>
       <div>
-        <Filter defaultFilters={[]} refreshSearch={refreshFilters} updateFilters={updateFilters} />
+        <Filter defaultFilters={[]} refreshFilters={refreshFilters} updateFilters={updateFilters} />
         <br></br>
         <div id="Notes-contnr">
           {(notesLoaded && notes.length == 0) ? emptyResultHTML : null}
