@@ -3,18 +3,19 @@ import NoteFilter from "../models/filters/noteFilter";
 import NoteItem from "../models/entities/noteItem";
 import UserItem from "../models/entities/userItem";
 import { AddUpdateNoteRequest, GetNotesByCriteriaRequest } from "../models/requests/noteRequests";
+import { UserContextType } from "../contexts/UserContext";
 
 class NoteHandler {
     user: UserItem;
     noteService: NoteService;
 
-    constructor(user?: UserItem) {
-        if (user) {
-            this.user = user;
+    constructor(userContext : UserContextType) {
+        if (userContext.user) {
+            this.user = userContext.user;
         } else {
             this.user = new UserItem();
         }
-        this.noteService = new NoteService(this.user);
+        this.noteService = new NoteService(userContext);
     }
 
     async getNotesByCriteria(filter: NoteFilter): Promise<NoteItem[]> {

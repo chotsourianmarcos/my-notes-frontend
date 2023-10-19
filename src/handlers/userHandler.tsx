@@ -2,20 +2,21 @@ import UserService from "../services/userService";
 import UserItem from "../models/entities/userItem";
 import RegisterFormData from "../models/forms/registerFormData";
 import LoginFormData from "../models/forms/loginFormData";
-import {LoginRequestData, RegisterRequestData} from "../models/requests/userRequests";
+import {LoginRequestData, RefreshTokenRequestData, RegisterRequestData} from "../models/requests/userRequests";
 import LoginResponseData from "../models/responses/loginResponseData";
+import { UserContextType } from "../contexts/UserContext";
 
 class UserHandler {
     user:UserItem;
     userService:UserService;
 
-    constructor(user?:UserItem) {
-        if(user){
-            this.user = user;
+    constructor(userContext: UserContextType) {
+        if(userContext.user){
+            this.user = userContext.user;
         }else{
             this.user = new UserItem();
         }
-        this.userService = new UserService(this.user);
+        this.userService = new UserService(userContext);
     }
 
     async register(formData:RegisterFormData):Promise<void> {
@@ -34,6 +35,14 @@ class UserHandler {
         requestData.userPassword = formData.userPassword;
 
         return await this.userService.login(requestData);
+    }
+
+    async generateNewRefreshToken():Promise<string> {
+        let requestData = new RefreshTokenRequestData();
+        requestData.accessToken = this.user.accessToken;
+        requestData.userIdWeb = this.user.userIdWeb;
+
+        return await this.userService.generateNewRefreshToken(requestData);
     }
 }
 

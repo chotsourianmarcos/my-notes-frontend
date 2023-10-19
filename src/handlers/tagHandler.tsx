@@ -1,18 +1,19 @@
 
 import TagService from "../services/tagService";
 import UserItem from "../models/entities/userItem";
+import { UserContextType } from "../contexts/UserContext";
 
 class TagHandler {
     user: UserItem;
     tagService: TagService;
 
-    constructor(user?: UserItem) {
-        if (user) {
-            this.user = user;
+    constructor(userContext: UserContextType) {
+        if (userContext.user) {
+            this.user = userContext.user;
         } else {
             this.user = new UserItem();
         }
-        this.tagService = new TagService(this.user);
+        this.tagService = new TagService(userContext);
     }
 
     async getAllTags(): Promise<string[]> {

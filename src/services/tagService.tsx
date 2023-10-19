@@ -1,10 +1,10 @@
 import ApiMyNotesSercice from "./apiMyNotesService";
-import UserItem from "../models/entities/userItem";
+import { UserContextType } from "../contexts/UserContext";
 
 class TagService extends ApiMyNotesSercice {
-    constructor(user:UserItem){         
-        super(user);
-      }
+    constructor(userContext:UserContextType){         
+        super(userContext);
+    }
 
     async getAllTags(): Promise<string[]> {
         let result = await this.apiMyNotes.get("/Tag/GetAllTags");

@@ -12,8 +12,8 @@ type FilterProps = {
 
 function Filter(props: FilterProps) {
     const { setAlertContext } = useContext(AlertContext);
-    const { user } = useContext(UserContext);
-    const tagHandler = new TagHandler(user);
+    const userContext = useContext(UserContext);
+    const tagHandler = new TagHandler(userContext);
 
     const [filters, setFilters] = useState(props.defaultFilters);
     const [allFilters, setAllFilters] = useState([] as string[]);
@@ -22,8 +22,8 @@ function Filter(props: FilterProps) {
         if (props.updateFilters) {
             tagHandler.getAllTags().then(
                 (value: any) => {
-                    let newAllFilters: string[] = [...value, 'archived'];
-                    setAllFilters(newAllFilters);
+                    let newAllFilters: string[] = [...value];
+                    setAllFilters([...newAllFilters, 'archived']);
                     let newFilters = [...filters, ...newAllFilters.filter((f: string) => !allFilters.includes(f))];
                     setFilters(newFilters);
                     props.refreshFilters(newFilters);

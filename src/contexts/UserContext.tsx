@@ -2,11 +2,12 @@ import { FC, createContext, useState } from "react";
 import UserItem from "../models/entities/userItem";
 import LoginResponseData from "../models/responses/loginResponseData";
 
-type UserContextType = {
+export type UserContextType = {
     isLogActive: boolean;
     setLogActive: (active: boolean) => void;
     user: UserItem;
     setUserData: (logData: LoginResponseData) => void;
+    setNewRefreshToken: (token: string) => void;
 }
 
 class DefaultUserContext implements UserContextType {
@@ -14,6 +15,7 @@ class DefaultUserContext implements UserContextType {
     setLogActive(active: boolean) { };
     user: UserItem = new UserItem();
     setUserData(logData: LoginResponseData) { };
+    setNewRefreshToken(token: string) { };
 }
 
 export const UserContext = createContext<UserContextType>(new DefaultUserContext());
@@ -39,6 +41,11 @@ const UserContextProvider: FC<Props> = ({ children }) => {
             user.userRol = logData.userRol;
             user.accessToken = logData.accessToken;
             user.refreshToken = logData.refreshToken;
+            setUser(user);
+        },
+        setNewRefreshToken: (token: string) => {
+            let updatedUser = {...user};
+            updatedUser.refreshToken = token;
             setUser(user);
         }
     };

@@ -3,10 +3,12 @@ import { useContext, useEffect, useState } from 'react';
 import { AlertContext } from '../../contexts/AlertContext';
 import UserHandler from '../../handlers/userHandler';
 import RegisterFormData from '../../models/forms/registerFormData';
+import { UserContext } from '../../contexts/UserContext';
 
 function Register() {
   const { setAlertContext } = useContext(AlertContext);
-  const userHandler = new UserHandler();
+  const userContext = useContext(UserContext);
+  const userHandler = new UserHandler(userContext);
 
   const [formData, setFormData] = useState(new RegisterFormData());
   const [validationErrorMsg, setvalidationErrorMsg] = useState("" as string);

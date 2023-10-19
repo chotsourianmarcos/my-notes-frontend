@@ -1,3 +1,8 @@
+class RefreshTokenRequestData {
+    accessToken: string = ""; 
+    userIdWeb: string = "";
+}
+
 class LoginRequestData {
     userName: string = "";
     userEmail: string = "";
@@ -10,4 +15,4 @@ class RegisterRequestData {
     userPassword: string = "";
 }
 
-export { LoginRequestData, RegisterRequestData };
+export { RefreshTokenRequestData, LoginRequestData, RegisterRequestData };

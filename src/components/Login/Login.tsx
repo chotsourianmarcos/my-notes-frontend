@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const { setAlertContext } = useContext(AlertContext);
-  const { setLogActive, setUserData, user } = useContext(UserContext);
+  const userContext = useContext(UserContext);
 
   const [formData, setFormData] = useState(new LoginFormData());
   const [validationErrorMsg, setvalidationErrorMsg] = useState("" as string);
@@ -28,7 +28,7 @@ function Login() {
     }
   }, [validationErrorMsg]);
 
-  const userHandler = new UserHandler(user);
+  const userHandler = new UserHandler(userContext);
   const navigate = useNavigate();
   
   const validateForm = () => {
@@ -53,8 +53,8 @@ function Login() {
 
     userHandler.login(formData).then(
       function (value) {
-        setLogActive(true);
-        setUserData(value);
+        userContext.setLogActive(true);
+        userContext.setUserData(value);
         navigate("/notes")
       },
       function (error) {

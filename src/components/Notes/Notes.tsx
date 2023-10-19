@@ -11,8 +11,8 @@ import { AlertContext } from '../../contexts/AlertContext';
 
 function Notes() {
   const { setAlertContext } = useContext(AlertContext);
-  const { user } = useContext(UserContext);
-  const noteHandler = new NoteHandler(user);
+  const userContext = useContext(UserContext);
+  const noteHandler = new NoteHandler(userContext);
 
   const defaultModalState = {
     isOpen: false,
@@ -137,7 +137,7 @@ function Notes() {
       filter.isArchived = true;
     }
     filter.tagsIncluded = filters;
-    filter.userIdWeb = user.userIdWeb;
+    filter.userIdWeb = userContext.user.userIdWeb;
     setFilter(filter);
     setNotesLoaded(false);
     setUpdateFilters(false);

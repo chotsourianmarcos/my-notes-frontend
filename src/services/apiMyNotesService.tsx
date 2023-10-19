@@ -1,40 +1,73 @@
-import axios from "axios";
-import UserItem from "../models/entities/userItem";
+import axios, { AxiosInstance } from "axios";
 import functions from "../resources/functions";
+import { UserContextType } from "../contexts/UserContext";
+import UserHandler from "../handlers/userHandler";
 
 class ApiMyNotesService {
 
-    apiMyNotes: any = null;
+    apiMyNotes: AxiosInstance;
+    createService(userContext: UserContextType, refreshToken: string = ""): AxiosInstance {
+        let currentToken = refreshToken.length > 0 ? refreshToken : userContext.user.refreshToken;
 
-    constructor(user: UserItem) {
         var service = axios.create({
             baseURL: 'https://localhost:7032',
             withCredentials: false,
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
-                Authorization: "Bearer " + user.refreshToken
+                Authorization: "Bearer " + currentToken
             }
         });
+
         service.interceptors.request.use(function (config) {
             functions.awaitCursor();
             return config;
-          }, function (error) {
+        }, function (error) {
             functions.defaultCursor();
             return Promise.reject(error);
-          });
+        });
+
         service.interceptors.response.use(
             (response) => {
                 functions.defaultCursor();
                 return response;
             },
-            (error) => {
-            functions.defaultCursor();
-            if(error.response.data.ReasonPhrase.includes('Expired token')){
-                console.log("asdasdasd");   
-            };
-        });
-        this.apiMyNotes = service;
+            async (error) => {
+                try {
+                    if (error.response.data.ReasonPhrase.includes('Expired token')) {
+                        let userHandler = new UserHandler(userContext);
+                        let newRefreshToken = await userHandler.generateNewRefreshToken();
+                        let originalRequest = error.config;
+                        originalRequest.headers.Authorization = 'Bearer ' + newRefreshToken;
+                        originalRequest._retry = true;
+                        this.apiMyNotes = this.createService(userContext, newRefreshToken);
+
+                        return this.apiMyNotes(originalRequest).then(
+                            (value) => {
+                                userContext.setNewRefreshToken(newRefreshToken);
+                                functions.defaultCursor();
+                                return value;
+                            },
+                            (error) => {
+                                userContext.setNewRefreshToken(newRefreshToken);
+                                functions.defaultCursor();
+                                throw error;
+                            }
+                        );
+                    };
+                } catch {
+                    functions.defaultCursor();
+
+                    throw error;
+                }
+            }
+        );
+
+        return service;
+    };
+
+    constructor(userContext: UserContextType) {
+        this.apiMyNotes = this.createService(userContext);
     }
 }
 
