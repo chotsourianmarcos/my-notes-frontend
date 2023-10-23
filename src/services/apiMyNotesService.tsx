@@ -14,17 +14,16 @@ class ApiMyNotesService {
             withCredentials: false,
             headers: {
                 'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "*",
-                "Access-Control-Allow-Headers": "Origin, X-Requested, Content-Type, Accept Authorization",
+                'Access-Control-Allow-Credentials': true,
+                'Access-Control-Allow-Methods': 'GET,PUT,PATCH,POST,DELETE,OPTIONS',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Headers': 'Origin, X-Requested, Content-Type, Accept Authorization',
                 Accept: 'application/json',
                 Authorization: "Bearer " + currentToken
             }
         });
         service.interceptors.request.use(function (config) {
             functions.awaitCursor();
-            if (config.method === "OPTIONS") {
-                config.headers["Access-Control-Allow-Methods"] = "POST, PUT, PATCH, GET, DELETE";
-            }
             return config;
         }, function (error) {
             functions.defaultCursor();
