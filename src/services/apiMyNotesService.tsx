@@ -10,18 +10,15 @@ class ApiMyNotesService {
         let currentToken = refreshToken.length > 0 ? refreshToken : userContext.user.refreshToken;
 
         var service = axios.create({
-            baseURL: 'https://my-notes-mc-backend-fbe1ee92a1cf.herokuapp.com',
+            baseURL: 'https://localhost:7032',
             withCredentials: false,
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Credentials': true,
-                'Access-Control-Allow-Methods': 'GET,PUT,PATCH,POST,DELETE,OPTIONS',
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Headers': 'Origin, X-Requested, Content-Type, Accept Authorization',
                 Accept: 'application/json',
                 Authorization: "Bearer " + currentToken
             }
         });
+
         service.interceptors.request.use(function (config) {
             functions.awaitCursor();
             return config;
