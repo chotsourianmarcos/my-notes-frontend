@@ -29,13 +29,7 @@ function Filter(props: FilterProps) {
                     props.refreshFilters(newFilters);
                 },
                 (error: any) => {
-                    setAlertContext(
-                        {
-                            isOpen: true,
-                            modalText: error.response.data.message.result,
-                            isConfirm: false,
-                            onClose(accept: boolean) { }
-                        });
+                    setAlertContext(true, error.response.data.message.result);
                 }
             )
         }

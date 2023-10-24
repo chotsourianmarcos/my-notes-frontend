@@ -16,15 +16,7 @@ function Login() {
 
   useEffect(() => {
     if (validationErrorMsg) {
-      setAlertContext(
-        {
-          isOpen: true,
-          modalText: validationErrorMsg,
-          isConfirm: false,
-          onClose(accept: boolean) {
-            setvalidationErrorMsg("");
-          }
-        });
+      setAlertContext(true, validationErrorMsg, false, (accept: boolean) =>{ setvalidationErrorMsg(""); });
     }
   }, [validationErrorMsg]);
 
@@ -58,13 +50,7 @@ function Login() {
         navigate("/notes")
       },
       function (error) {
-        setAlertContext(
-          {
-            isOpen: true,
-            modalText: error.response.data.message.result,
-            isConfirm: false,
-            onClose(accept: boolean) { }
-          });
+        setAlertContext(true, error.response.data.message.result, false, (accept: boolean) => { });
       });
   }
 

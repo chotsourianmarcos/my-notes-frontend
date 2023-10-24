@@ -31,23 +31,17 @@ function Note(props: NoteProps) {
         props.toggleArchive(props.noteItem);
     }
     function confirmDeleteNote() {
-        setAlertContext(
-            {
-                isOpen: true,
-                modalText: "Please confirm that you really want to permanently delete this note.",
-                isConfirm: true,
-                onClose(accept: boolean) {
-                    if (accept) {
-                        deleteNote();
-                    }
-                }
-            });
-    }
+        let alertCallback = (accept: boolean) => {
+            if (accept) {
+                deleteNote();
+            }
+        };
+        setAlertContext(true, "Please confirm that you really want to permanently delete this note.", true, alertCallback);
 
-    function deleteNote() {
-        props.deleteNote(props.noteItem.idWeb);
+        function deleteNote() {
+            props.deleteNote(props.noteItem.idWeb);
+        }
     }
-
     return (
         <>
             <div className="note__contnr">

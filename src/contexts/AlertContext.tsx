@@ -3,7 +3,10 @@ import { AlertModalProps } from "../models/types/alertModalProps";
 
 type AlertContextType = {
     modalValues: AlertModalProps,
-    setAlertContext: (values: any) => void;
+    setAlertContext: (isOpen: boolean,
+        modalText?: string,
+        isConfirm?: boolean,
+        onClose?: ((accept: boolean) => void)) => void;
 }
 
 class DefaultAlertContext implements AlertContextType {
@@ -11,9 +14,12 @@ class DefaultAlertContext implements AlertContextType {
         isOpen: false,
         modalText: "",
         isConfirm: false,
-        onClose(accept: boolean){ }
+        onClose(accept: boolean) { }
     };
-    setAlertContext(values: any){ };
+    setAlertContext(isOpen: boolean,
+        modalText?: string,
+        isConfirm?: boolean,
+        onClose?: ((accept: boolean) => void)) { };
 }
 
 export const AlertContext = createContext<AlertContextType>(new DefaultAlertContext());
@@ -26,8 +32,18 @@ const AlertContextProvider: FC<Props> = ({ children }) => {
     const [modalValues, setAlertContext] = useState(new DefaultAlertContext().modalValues);
 
     const value = {
-        setAlertContext: (value: AlertModalProps) => {
-            setAlertContext(value);
+        setAlertContext(isOpen: boolean,
+            modalText?: string,
+            isConfirm?: boolean,
+            onClose?: ((accept: boolean) => void)) {
+            let modalProps = new DefaultAlertContext();
+
+            modalProps.modalValues.isOpen = isOpen ? true : false;
+            modalProps.modalValues.modalText = modalText !== undefined ? modalText : "";
+            modalProps.modalValues.isConfirm = isConfirm ? isConfirm : false;
+            modalProps.modalValues.onClose = onClose !== undefined ? onClose : (accept: boolean) => { };
+
+            setAlertContext(modalProps.modalValues);
         },
         modalValues
     };

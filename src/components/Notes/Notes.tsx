@@ -45,13 +45,7 @@ function Notes() {
       (error: any) => {
         setNotesLoaded(false);
         setNotes([]);
-        setAlertContext(
-          {
-            isOpen: true,
-            modalText: error.response.data.message.result,
-            isConfirm: false,
-            onClose(accept: boolean) { }
-          });
+        setAlertContext(true, error.response.data.message.result);
       }
     );
   };
@@ -61,39 +55,18 @@ function Notes() {
     noteHandler.addUpdateNote(noteItem).then(
       () => setNotesLoaded(false),
       (error: any) => {
-        setAlertContext(
-          {
-            isOpen: true,
-            modalText: error.response.data.message.result,
-            isConfirm: false,
-            onClose(accept: boolean) { }
-          });
+        setAlertContext(true, error.response.data.message.result);
       }
     );
   };
-  const deleteNote = (idWeb:string) => {
+  const deleteNote = (idWeb: string) => {
     noteHandler.deleteNote(idWeb).then(
       () => {
-        setAlertContext(
-          {
-            isOpen: true,
-            modalText: "Successful delete.",
-            isConfirm: false,
-            onClose(accept: boolean) {
-              setNotesLoaded(false);
-              setUpdateFilters(true);
-            }
-          }
-        );
+        setAlertContext(true, "Successful delete.", false, (accept: boolean) => { setNotesLoaded(false) });
+        setUpdateFilters(true);
       },
       (error: any) => {
-        setAlertContext(
-          {
-            isOpen: true,
-            modalText: error.response.data.message.result,
-            isConfirm: false,
-            onClose(accept: boolean) { }
-          });
+        setAlertContext(true, error.response.data.message.result);
       });
   }
 
@@ -114,20 +87,14 @@ function Notes() {
           setUpdateFilters(true);
         },
         (error: any) => {
-          setAlertContext(
-            {
-              isOpen: true,
-              modalText: error.response.data.message.result,
-              isConfirm: false,
-              onClose(accept: boolean) { }
-            });
+          setAlertContext(true, error.response.data.message.result);
         }
       );
     } else {
       setModalState(defaultModalState);
     }
   };
-  
+
   const createNewNote = () => {
     openModal(new NoteItem);
   }
@@ -156,8 +123,8 @@ function Notes() {
   const newNoteHTML = alertNote("New note", "Click here to add a new note.", createNewNote);
   const emptyResultHTML = (
     <>
-    {newNoteHTML}
-    {alertNote("Empty result", "There are no notes to be shown yet.", null)}
+      {newNoteHTML}
+      {alertNote("Empty result", "There are no notes to be shown yet.", null)}
     </>
   );
   let notesHTML = (

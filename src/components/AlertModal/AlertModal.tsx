@@ -9,13 +9,7 @@ function AlertModal(props: AlertModalProps) {
     if (!props.isOpen) return null;
 
     function resetModal() {
-        setAlertContext(
-            {
-                isOpen: false,
-                modalText: "",
-                isConfirm: false,
-                onClose(accept: boolean) { }
-            });
+        setAlertContext(false);
     }
     function closeModal() {
         props.onClose(false);

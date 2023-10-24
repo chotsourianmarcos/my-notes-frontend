@@ -65,15 +65,7 @@ function Register() {
 
   useEffect(() => {
     if (validationErrorMsg) {
-      setAlertContext(
-        {
-          isOpen: true,
-          modalText: validationErrorMsg,
-          isConfirm: false,
-          onClose(accept: boolean) {
-            setvalidationErrorMsg("");
-          }
-        });
+      setAlertContext(true, validationErrorMsg, false, (accept: boolean) => { setvalidationErrorMsg(""); });
     }
   }, [validationErrorMsg]);
 
@@ -92,24 +84,11 @@ function Register() {
 
     userHandler.register(formData).then(
       function () {
-        setAlertContext(
-          {
-            isOpen: true,
-            modalText: "Successful registration.",
-            isConfirm: false,
-            onClose(accept: boolean) { }
-          }
-        );
+        setAlertContext(true, "Successful registration.");
         setFormData(new RegisterFormData());
       },
       function (error: any) {
-        setAlertContext(
-          {
-            isOpen: true,
-            modalText: error.response.data.message.result,
-            isConfirm: false,
-            onClose(accept: boolean) { }
-          });
+        setAlertContext(true, error.response.data.message.result);
       });
   }
 

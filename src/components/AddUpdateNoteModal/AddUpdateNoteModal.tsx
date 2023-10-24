@@ -22,15 +22,7 @@ function AddUpdateNoteModal(props: AddUpdateNoteModalProps) {
 
   useEffect(() => {
     if (validationErrorMsg && props.modalState.isOpen) {
-      setAlertContext(
-        {
-          isOpen: true,
-          modalText: validationErrorMsg,
-          isConfirm: false,
-          onClose(accept: boolean) {
-            setvalidationErrorMsg("");
-          }
-        });
+      setAlertContext(true, validationErrorMsg, false, (accept: boolean) => { setvalidationErrorMsg("");} );
     }
   }, [validationErrorMsg]);
 
@@ -38,7 +30,7 @@ function AddUpdateNoteModal(props: AddUpdateNoteModalProps) {
     if (props.modalState.noteItem.idWeb !== "") {
       setNoteItem(props.modalState.noteItem);
       setFormData(new AddUpdateNoteFormData(props.modalState.noteItem));
-    }else{
+    } else {
       setFormData(new AddUpdateNoteFormData(new NoteItem()));
       setFormData((values: any) => ({ ...values, tagsNames: [] }));
       setNoteItem(props.modalState.noteItem);
