@@ -6,7 +6,6 @@ import Nav from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
 import AlertModal from '../AlertModal/AlertModal';
 
-
 function Layout() {
   const { modalValues } = useContext(AlertContext);
   

@@ -4,6 +4,8 @@ import { AlertContext } from '../../contexts/AlertContext';
 import NoteItem from '../../models/entities/noteItem';
 import TagItem from '../../models/entities/tagItem';
 import AddUpdateNoteFormData from '../../models/forms/addUpdateNoteFormData';
+import { errors } from '../../resources/strings';
+import regex from '../../resources/regexs';
 
 type AddUpdateNoteModalProps = {
   modalState: {
@@ -41,34 +43,34 @@ function AddUpdateNoteModal(props: AddUpdateNoteModalProps) {
 
   const validateTag = (tag: string) => {
     if (tag.length > 20) {
-      setvalidationErrorMsg("Tags cannot be longer than 20 characters.");
+      setvalidationErrorMsg(errors.tagsTooLong);
       return false;
     }
-    const alpha = /^[A-Za-z]+$/;
-    if (!alpha.test(tag)) {
-      setvalidationErrorMsg("Tags can only contain letters.");
+    const alphabetical = regex.alphabetical;
+    if (!alphabetical.test(tag)) {
+      setvalidationErrorMsg(errors.tagsOnlyAlphabetical);
       return false;
     }
     return true;
   }
   const validateNotRepeatedTag = (tag: string) => {
     if (formData.tagsNames.includes(tag)) {
-      setvalidationErrorMsg("Tag is already included.");
+      setvalidationErrorMsg(errors.tagAlreadyIncluded);
       return false;
     }
     return true;
   }
   const validateForm = () => {
     if (!formData.content) {
-      setvalidationErrorMsg("Content cannot be empty.");
+      setvalidationErrorMsg(errors.emptyContent);
       return false;
     }
     if (formData.content.length > 2000) {
-      setvalidationErrorMsg("Content cannot be longer than 2000 characters.");
+      setvalidationErrorMsg(errors.contentTooLong);
       return false;
     }
     if (formData.newTag.length > 0) {
-      setvalidationErrorMsg("The new tag has not been added yet. Please add or erase.");
+      setvalidationErrorMsg(errors.newTagPending);
       return false;
     }
     formData.tagsNames.forEach(t => {

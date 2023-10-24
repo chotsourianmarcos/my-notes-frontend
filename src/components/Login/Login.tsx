@@ -5,6 +5,7 @@ import { UserContext } from '../../contexts/UserContext';
 import UserHandler from '../../handlers/userHandler';
 import LoginFormData from '../../models/forms/loginFormData';
 import { useNavigate } from 'react-router-dom';
+import { errors } from '../../resources/strings';
 
 
 function Login() {
@@ -25,7 +26,7 @@ function Login() {
   
   const validateForm = () => {
     if (!formData.userName || !formData.userEmail || !formData.userPassword) {
-      setvalidationErrorMsg("Fields cannot be empty.");
+      setvalidationErrorMsg(errors.emptyFields);
       return false;
     }
     return true;

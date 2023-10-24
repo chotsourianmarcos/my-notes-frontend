@@ -2,6 +2,7 @@ import './Note.css';
 import { useContext } from 'react';
 import { AlertContext } from '../../contexts/AlertContext';
 import NoteItem from '../../models/entities/noteItem';
+import { messages } from '../../resources/strings';
 
 type NoteProps = {
     key: number;
@@ -36,7 +37,7 @@ function Note(props: NoteProps) {
                 deleteNote();
             }
         };
-        setAlertContext(true, "Please confirm that you really want to permanently delete this note.", true, alertCallback);
+        setAlertContext(true, messages.confirmDeleteNote, true, alertCallback);
 
         function deleteNote() {
             props.deleteNote(props.noteItem.idWeb);

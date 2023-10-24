@@ -4,6 +4,8 @@ import { AlertContext } from '../../contexts/AlertContext';
 import UserHandler from '../../handlers/userHandler';
 import RegisterFormData from '../../models/forms/registerFormData';
 import { UserContext } from '../../contexts/UserContext';
+import {alerts, errors} from '../../resources/strings';
+import regex from '../../resources/regexs';
 
 function Register() {
   const { setAlertContext } = useContext(AlertContext);
@@ -15,49 +17,49 @@ function Register() {
 
   const validateForm = () => {
     if (!formData.userName) {
-      setvalidationErrorMsg("User name cannot be empty.");
+      setvalidationErrorMsg(errors.emptyUserName);
       return false;
     }
     if (formData.userName.length > 30) {
-      setvalidationErrorMsg("User name cannot have more than 30 characters.");
+      setvalidationErrorMsg(errors.userNameTooLong);
       return false;
     }
-    const alphanumerical = /^[A-Za-z0-9]+$/;
+    const alphanumerical = regex.alphanumerical;
     if (!alphanumerical.test(formData.userName)) {
-      setvalidationErrorMsg("User name can contain only letters and numbers.");
+      setvalidationErrorMsg(errors.userNameInvalidRegex);
       return false;
     }
     if (!formData.userEmail) {
-      setvalidationErrorMsg("User email cannot be empty.");
+      setvalidationErrorMsg(errors.emptyUserEmail);
       return false;
     }
     if (formData.userEmail.length > 60) {
-      setvalidationErrorMsg("User name cannot have more than 60 characters.");
+      setvalidationErrorMsg(errors.userEmailTooLong);
       return false;
     }
-    const email = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    const email = regex.validEmail;
     if (!email.test(formData.userEmail)) {
-      setvalidationErrorMsg("Email is invalid.");
+      setvalidationErrorMsg(errors.invalidEmailRegex);
       return false;
     }
     if (!formData.userPassword) {
-      setvalidationErrorMsg("User password cannot be empty.");
+      setvalidationErrorMsg(errors.emptyPassword);
       return false;
     }
     if (formData.userPassword.length < 12) {
-      setvalidationErrorMsg("User password cannot be shorter than 12 characters.");
+      setvalidationErrorMsg(errors.passwordTooShort);
       return false;
     }
     if (formData.userEmail.length > 30) {
-      setvalidationErrorMsg("User password cannot have more than 30 characters.");
+      setvalidationErrorMsg(errors.passwordTooLong);
       return false;
     }
     if (formData.userEmail != formData.confirmUserEmail) {
-      setvalidationErrorMsg("The given e-mail adresses do not match.");
+      setvalidationErrorMsg(errors.emailsDontMatch);
       return false;
     }
     if (formData.userPassword != formData.confirmUserPassword) {
-      setvalidationErrorMsg("The given passwords do not match.");
+      setvalidationErrorMsg(errors.passwordsDontMatch);
       return false;
     }
     return true;
@@ -84,7 +86,7 @@ function Register() {
 
     userHandler.register(formData).then(
       function () {
-        setAlertContext(true, "Successful registration.");
+        setAlertContext(true, alerts.registrationSuccess);
         setFormData(new RegisterFormData());
       },
       function (error: any) {

@@ -8,6 +8,7 @@ import NoteFilter from '../../models/filters/noteFilter';
 import NoteItem from '../../models/entities/noteItem';
 import NoteHandler from '../../handlers/noteHandler';
 import { AlertContext } from '../../contexts/AlertContext';
+import { alerts, headers, messages } from '../../resources/strings';
 
 function Notes() {
   const { setAlertContext } = useContext(AlertContext);
@@ -62,7 +63,7 @@ function Notes() {
   const deleteNote = (idWeb: string) => {
     noteHandler.deleteNote(idWeb).then(
       () => {
-        setAlertContext(true, "Successful delete.", false, (accept: boolean) => { setNotesLoaded(false) });
+        setAlertContext(true, alerts.deleteSuccess, false, (accept: boolean) => { setNotesLoaded(false) });
         setUpdateFilters(true);
       },
       (error: any) => {
@@ -79,7 +80,7 @@ function Notes() {
     return undefined;
   };
   const closeModal = (accepted: boolean, noteItem?: NoteItem) => {
-    if (accepted && typeof noteItem !== "undefined") {
+    if (accepted && noteItem !== undefined) {
       noteHandler.addUpdateNote(noteItem).then(
         () => {
           setModalState(defaultModalState);
@@ -120,11 +121,11 @@ function Notes() {
       </div>
     </div>
   );
-  const newNoteHTML = alertNote("New note", "Click here to add a new note.", createNewNote);
+  const newNoteHTML = alertNote(headers.newNote, messages.addNoteMessage, createNewNote);
   const emptyResultHTML = (
     <>
       {newNoteHTML}
-      {alertNote("Empty result", "There are no notes to be shown yet.", null)}
+      {alertNote(headers.emptyResult, messages.noNotesFound, null)}
     </>
   );
   let notesHTML = (
