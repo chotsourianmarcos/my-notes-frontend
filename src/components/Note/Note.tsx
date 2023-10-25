@@ -1,8 +1,8 @@
 import './Note.css';
 import { useContext } from 'react';
+import { LanguageContext } from '../../contexts/LanguageContext';
 import { AlertContext } from '../../contexts/AlertContext';
 import NoteItem from '../../models/entities/noteItem';
-import { messages } from '../../resources/strings';
 
 type NoteProps = {
     key: number;
@@ -13,6 +13,7 @@ type NoteProps = {
 }
 
 function Note(props: NoteProps) {
+    const { strings } = useContext(LanguageContext);
     const { setAlertContext } = useContext(AlertContext);
 
     let tagListString = "";
@@ -37,7 +38,7 @@ function Note(props: NoteProps) {
                 deleteNote();
             }
         };
-        setAlertContext(true, messages.confirmDeleteNote, true, alertCallback);
+        setAlertContext(true, strings.messages.confirmDeleteNote, true, alertCallback);
 
         function deleteNote() {
             props.deleteNote(props.noteItem.idWeb);

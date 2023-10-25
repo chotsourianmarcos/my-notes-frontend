@@ -1,13 +1,14 @@
 import './Register.css';
 import { useContext, useEffect, useState } from 'react';
+import { LanguageContext } from '../../contexts/LanguageContext';
 import { AlertContext } from '../../contexts/AlertContext';
 import UserHandler from '../../handlers/userHandler';
 import RegisterFormData from '../../models/forms/registerFormData';
 import { UserContext } from '../../contexts/UserContext';
-import {alerts, errors} from '../../resources/strings';
 import regex from '../../resources/regexs';
 
 function Register() {
+  const { strings } = useContext(LanguageContext);
   const { setAlertContext } = useContext(AlertContext);
   const userContext = useContext(UserContext);
   const userHandler = new UserHandler(userContext);
@@ -17,49 +18,49 @@ function Register() {
 
   const validateForm = () => {
     if (!formData.userName) {
-      setvalidationErrorMsg(errors.emptyUserName);
+      setvalidationErrorMsg(strings.errors.emptyUserName);
       return false;
     }
     if (formData.userName.length > 30) {
-      setvalidationErrorMsg(errors.userNameTooLong);
+      setvalidationErrorMsg(strings.errors.userNameTooLong);
       return false;
     }
     const alphanumerical = regex.alphanumerical;
     if (!alphanumerical.test(formData.userName)) {
-      setvalidationErrorMsg(errors.userNameInvalidRegex);
+      setvalidationErrorMsg(strings.errors.userNameInvalidRegex);
       return false;
     }
     if (!formData.userEmail) {
-      setvalidationErrorMsg(errors.emptyUserEmail);
+      setvalidationErrorMsg(strings.errors.emptyUserEmail);
       return false;
     }
     if (formData.userEmail.length > 60) {
-      setvalidationErrorMsg(errors.userEmailTooLong);
+      setvalidationErrorMsg(strings.errors.userEmailTooLong);
       return false;
     }
     const email = regex.validEmail;
     if (!email.test(formData.userEmail)) {
-      setvalidationErrorMsg(errors.invalidEmailRegex);
+      setvalidationErrorMsg(strings.errors.invalidEmailRegex);
       return false;
     }
     if (!formData.userPassword) {
-      setvalidationErrorMsg(errors.emptyPassword);
+      setvalidationErrorMsg(strings.errors.emptyPassword);
       return false;
     }
     if (formData.userPassword.length < 12) {
-      setvalidationErrorMsg(errors.passwordTooShort);
+      setvalidationErrorMsg(strings.errors.passwordTooShort);
       return false;
     }
     if (formData.userEmail.length > 30) {
-      setvalidationErrorMsg(errors.passwordTooLong);
+      setvalidationErrorMsg(strings.errors.passwordTooLong);
       return false;
     }
     if (formData.userEmail != formData.confirmUserEmail) {
-      setvalidationErrorMsg(errors.emailsDontMatch);
+      setvalidationErrorMsg(strings.errors.emailsDontMatch);
       return false;
     }
     if (formData.userPassword != formData.confirmUserPassword) {
-      setvalidationErrorMsg(errors.passwordsDontMatch);
+      setvalidationErrorMsg(strings.errors.passwordsDontMatch);
       return false;
     }
     return true;
@@ -86,7 +87,7 @@ function Register() {
 
     userHandler.register(formData).then(
       function () {
-        setAlertContext(true, alerts.registrationSuccess);
+        setAlertContext(true, strings.alerts.registrationSuccess);
         setFormData(new RegisterFormData());
       },
       function (error: any) {

@@ -1,10 +1,10 @@
 import './AddUpdateNoteModal.css';
 import { useContext, useEffect, useState } from 'react';
+import { LanguageContext } from '../../contexts/LanguageContext';
 import { AlertContext } from '../../contexts/AlertContext';
 import NoteItem from '../../models/entities/noteItem';
 import TagItem from '../../models/entities/tagItem';
 import AddUpdateNoteFormData from '../../models/forms/addUpdateNoteFormData';
-import { errors } from '../../resources/strings';
 import regex from '../../resources/regexs';
 
 type AddUpdateNoteModalProps = {
@@ -16,6 +16,7 @@ type AddUpdateNoteModalProps = {
 }
 
 function AddUpdateNoteModal(props: AddUpdateNoteModalProps) {
+  const { strings } = useContext(LanguageContext);
   const { setAlertContext } = useContext(AlertContext);
 
   const [noteItem, setNoteItem] = useState(new NoteItem());
@@ -43,34 +44,34 @@ function AddUpdateNoteModal(props: AddUpdateNoteModalProps) {
 
   const validateTag = (tag: string) => {
     if (tag.length > 20) {
-      setvalidationErrorMsg(errors.tagsTooLong);
+      setvalidationErrorMsg(strings.errors.tagsTooLong);
       return false;
     }
     const alphabetical = regex.alphabetical;
     if (!alphabetical.test(tag)) {
-      setvalidationErrorMsg(errors.tagsOnlyAlphabetical);
+      setvalidationErrorMsg(strings.errors.tagsOnlyAlphabetical);
       return false;
     }
     return true;
   }
   const validateNotRepeatedTag = (tag: string) => {
     if (formData.tagsNames.includes(tag)) {
-      setvalidationErrorMsg(errors.tagAlreadyIncluded);
+      setvalidationErrorMsg(strings.errors.tagAlreadyIncluded);
       return false;
     }
     return true;
   }
   const validateForm = () => {
     if (!formData.content) {
-      setvalidationErrorMsg(errors.emptyContent);
+      setvalidationErrorMsg(strings.errors.emptyContent);
       return false;
     }
     if (formData.content.length > 2000) {
-      setvalidationErrorMsg(errors.contentTooLong);
+      setvalidationErrorMsg(strings.errors.contentTooLong);
       return false;
     }
     if (formData.newTag.length > 0) {
-      setvalidationErrorMsg(errors.newTagPending);
+      setvalidationErrorMsg(strings.errors.newTagPending);
       return false;
     }
     formData.tagsNames.forEach(t => {

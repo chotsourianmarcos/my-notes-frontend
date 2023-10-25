@@ -1,5 +1,6 @@
 import './Notes.css';
 import { useContext, useState } from 'react';
+import { LanguageContext } from '../../contexts/LanguageContext';
 import { UserContext } from '../../contexts/UserContext';
 import Filter from '../Filter/Filter';
 import Note from '../Note/Note';
@@ -8,9 +9,9 @@ import NoteFilter from '../../models/filters/noteFilter';
 import NoteItem from '../../models/entities/noteItem';
 import NoteHandler from '../../handlers/noteHandler';
 import { AlertContext } from '../../contexts/AlertContext';
-import { alerts, headers, messages } from '../../resources/strings';
 
 function Notes() {
+  const { strings } = useContext(LanguageContext);
   const { setAlertContext } = useContext(AlertContext);
   const userContext = useContext(UserContext);
   const noteHandler = new NoteHandler(userContext);
@@ -63,7 +64,7 @@ function Notes() {
   const deleteNote = (idWeb: string) => {
     noteHandler.deleteNote(idWeb).then(
       () => {
-        setAlertContext(true, alerts.deleteSuccess, false, (accept: boolean) => { setNotesLoaded(false) });
+        setAlertContext(true, strings.alerts.deleteSuccess, false, (accept: boolean) => { setNotesLoaded(false) });
         setUpdateFilters(true);
       },
       (error: any) => {
@@ -121,11 +122,11 @@ function Notes() {
       </div>
     </div>
   );
-  const newNoteHTML = alertNote(headers.newNote, messages.addNoteMessage, createNewNote);
+  const newNoteHTML = alertNote(strings.headers.newNote, strings.messages.addNoteMessage, createNewNote);
   const emptyResultHTML = (
     <>
       {newNoteHTML}
-      {alertNote(headers.emptyResult, messages.noNotesFound, null)}
+      {alertNote(strings.headers.emptyResult, strings.messages.noNotesFound, null)}
     </>
   );
   let notesHTML = (

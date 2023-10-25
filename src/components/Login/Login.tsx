@@ -1,14 +1,15 @@
 import './Login.css';
 import { useContext, useEffect, useState } from 'react';
+import { LanguageContext } from '../../contexts/LanguageContext';
 import { AlertContext } from '../../contexts/AlertContext';
 import { UserContext } from '../../contexts/UserContext';
 import UserHandler from '../../handlers/userHandler';
 import LoginFormData from '../../models/forms/loginFormData';
 import { useNavigate } from 'react-router-dom';
-import { errors } from '../../resources/strings';
 
 
 function Login() {
+  const { strings } = useContext(LanguageContext);
   const { setAlertContext } = useContext(AlertContext);
   const userContext = useContext(UserContext);
 
@@ -26,7 +27,7 @@ function Login() {
   
   const validateForm = () => {
     if (!formData.userName || !formData.userEmail || !formData.userPassword) {
-      setvalidationErrorMsg(errors.emptyFields);
+      setvalidationErrorMsg(strings.errors.emptyFields);
       return false;
     }
     return true;

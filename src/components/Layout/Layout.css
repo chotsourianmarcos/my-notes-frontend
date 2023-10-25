@@ -115,6 +115,21 @@ body,
     height: 100%;
 }
 
+.dflt__lbl{
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.lbl__isActive{
+    background-color: #f8fff0;
+    color: black;
+}
+
+.lbl__isInactive{
+    background-color: #aed984c4;
+    color: white;
+}
+
 /*END GENERAL STYLES*/
 
 /*GENERAL RESPONSIVE DESIGN*/

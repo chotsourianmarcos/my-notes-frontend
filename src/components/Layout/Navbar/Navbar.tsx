@@ -22,6 +22,11 @@ function Nav() {
       key: 1,
       itemRoute: "/register/",
       itemText: "Register"
+    },
+    {
+      key: 2,
+      itemRoute: "/settings/",
+      itemText: "Settings"
     }
   ];
 
@@ -31,6 +36,11 @@ function Nav() {
       itemRoute: "/",
       itemText: "Log out",
       onClick: () => logOut()
+    },
+    {
+      key: 1,
+      itemRoute: "/settings/",
+      itemText: "Settings"
     }
   ];
 

@@ -56,9 +56,9 @@ function Filter(props: FilterProps) {
 
     const setActiveClass = (filter: string, className: string) => {
         if (filters.includes(filter)) {
-            return className + ' filter__isActive';
+            return className + ' lbl__isActive';
         } else {
-            return className + ' filter__isInactive';
+            return className + ' lbl__isInactive';
         }
     }
 
@@ -72,7 +72,7 @@ function Filter(props: FilterProps) {
                 {allFilters.map((f: string) => (
                     <div key={allFilters.indexOf(f)}>
                         <div className={setActiveClass(f, 'filter__contnr')}>
-                            <label className={setActiveClass(f, 'filter__lbl')} id={f} onClick={toggleFilter}>{f}</label>
+                            <label className={setActiveClass(f, 'dflt__lbl')} id={f} onClick={toggleFilter}>{f}</label>
                         </div>
                     </div>
                 ))}
