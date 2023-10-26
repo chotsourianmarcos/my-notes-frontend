@@ -25,7 +25,7 @@ function AddUpdateNoteModal(props: AddUpdateNoteModalProps) {
 
   useEffect(() => {
     if (validationErrorMsg && props.modalState.isOpen) {
-      setAlertContext(true, validationErrorMsg, false, (accept: boolean) => { setvalidationErrorMsg("");} );
+      setAlertContext(true, validationErrorMsg, false, (accept: boolean) => { setvalidationErrorMsg(""); });
     }
   }, [validationErrorMsg]);
 
@@ -150,7 +150,7 @@ function AddUpdateNoteModal(props: AddUpdateNoteModalProps) {
           <div className='inpt-contnr hor-ver-center-cnt'>
             <div className='dflt-column hor-ver-center-cnt'>
               <label className='full-width row-start underlined'>
-                New Tag:
+                {strings.labels.newTag}:
               </label>
               <input
                 className='full-width'
@@ -159,17 +159,17 @@ function AddUpdateNoteModal(props: AddUpdateNoteModalProps) {
                 value={formData.newTag}
                 onChange={handleChange}
               />
-              <label className='full-width row-start' onClick={addTag}>Confirm<span className="confirm__char">&nbsp; &#10003;</span></label>
+              <label className='full-width row-start' onClick={addTag}>{strings.labels.confirm}<span className="confirm__char">&nbsp; &#10003;</span></label>
               <br></br>
               <label className='full-width row-start underlined'>
-                Tags:
+                {strings.labels.tags}:
               </label>
               <div className='full-width row-start'>
                 {tagsHTML}
               </div>
               <br></br>
               <label className='full-width row-start underlined'>
-                Content:
+                {strings.labels.content}:
               </label>
               <textarea
                 className='expandable-textarea full-width'
@@ -183,8 +183,8 @@ function AddUpdateNoteModal(props: AddUpdateNoteModalProps) {
           <div>
             <div className='dflt-row'>
               <div className='width-15'></div>
-              <button className='dflt-btn' type="submit">Confirm</button>
-              <button className='dflt-btn' onClick={closeModal}>Close</button>
+              <button className='dflt-btn' type="submit">{strings.labels.confirm}</button>
+              <button className='dflt-btn' onClick={closeModal}>{strings.labels.close}</button>
               <div className='width-15'></div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import ApiMyNotesService from "./apiMyNotesService";
+import { UserContextType } from "../contexts/UserContext";
 import { LoginRequestData, RefreshTokenRequestData, RegisterRequestData } from "../models/requests/userRequests";
 import LoginResponseData from "../models/responses/loginResponseData";
-import { UserContextType } from "../contexts/UserContext";
 
 class UserService extends ApiMyNotesService {
     constructor(userContext:UserContextType){         

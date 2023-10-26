@@ -10,6 +10,10 @@
     overflow-y: scroll;
 }
 
+.smallFontSize{
+    font-size: small;
+}
+
 @media only screen and (max-width: 420px) {
     .alert-note__contnr {
         display: flex;

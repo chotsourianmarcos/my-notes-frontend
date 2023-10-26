@@ -1,9 +1,11 @@
 import './AlertModal.css';
 import { useContext } from 'react';
+import { LanguageContext } from '../../contexts/LanguageContext';
 import { AlertContext } from '../../contexts/AlertContext';
 import { AlertModalProps } from '../../models/types/alertModalProps';
 
 function AlertModal(props: AlertModalProps) {
+    const { strings } = useContext(LanguageContext);
     const { setAlertContext } = useContext(AlertContext);
 
     if (!props.isOpen) return null;
@@ -34,7 +36,7 @@ function AlertModal(props: AlertModalProps) {
                 <div className="dflt-row full-width">
                     {props.isConfirm ? confirmBtn : null}
                     <button className='dflt-btn' onClick={closeModal}>
-                        Close
+                        {strings.labels.close}
                     </button>
                 </div>
             </div>

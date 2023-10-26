@@ -23,7 +23,7 @@ function Note(props: NoteProps) {
         });
         tagListString = tagListString.slice(0, -1);
     } else {
-        tagListString = "general";
+        tagListString = strings.labels.generalTag;
     }
 
     function updateNote() {
@@ -57,11 +57,11 @@ function Note(props: NoteProps) {
                 <div className="card bg-light mb-3">
                     <div className="card-body">
                         <p className="card-text dflt-row">
-                            <span onClick={updateNote}>Update</span>
+                            <span className="smallFontSize" onClick={updateNote}>{strings.labels.edit}</span>
                             {!props.noteItem.isArchived ?
-                                <span onClick={toggleArchive}>Archive</span> :
-                                <span onClick={toggleArchive}>Unarchive</span>}
-                            <span onClick={confirmDeleteNote}>Delete</span>
+                                <span className="smallFontSize" onClick={toggleArchive}>{strings.labels.archive}</span> :
+                                <span className="smallFontSize" onClick={toggleArchive}>{strings.labels.unarchive}</span>}
+                            <span className="smallFontSize" onClick={confirmDeleteNote}>{strings.labels.delete}</span>
                         </p>
                     </div>
                 </div>

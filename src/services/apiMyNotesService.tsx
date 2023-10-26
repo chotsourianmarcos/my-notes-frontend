@@ -1,7 +1,8 @@
 import axios, { AxiosInstance } from "axios";
-import functions from "../resources/functions";
 import { UserContextType } from "../contexts/UserContext";
 import UserHandler from "../handlers/userHandler";
+import functions from "../resources/functions";
+import { values } from "../constants/values";
 
 class ApiMyNotesService {
 
@@ -15,7 +16,7 @@ class ApiMyNotesService {
             headers: {
                 'Content-Type': 'application/json',
                 Accept: 'application/json',
-                Authorization: "Bearer " + currentToken
+                Authorization: values.bearerTokenIntro + currentToken
             }
         });
 
@@ -34,11 +35,11 @@ class ApiMyNotesService {
             },
             async (error) => {
                 try {
-                    if (error.response.data.ReasonPhrase.includes('Expired token')) {
+                    if (error.response.data.ReasonPhrase.includes(values.expiredTokenPhrase)) {
                         let userHandler = new UserHandler(userContext);
                         let newRefreshToken = await userHandler.generateNewRefreshToken();
                         let originalRequest = error.config;
-                        originalRequest.headers.Authorization = 'Bearer ' + newRefreshToken;
+                        originalRequest.headers.Authorization = values.bearerTokenIntro + newRefreshToken;
                         originalRequest._retry = true;
                         this.apiMyNotes = this.createService(userContext, newRefreshToken);
 

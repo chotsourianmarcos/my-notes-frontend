@@ -1,5 +1,7 @@
+import { values } from "../../constants/values";
+
 class SettingsFormData {
-    language: string = "EN";
+    language: string = values.english;
 }
 
 export default SettingsFormData;

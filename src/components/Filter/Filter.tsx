@@ -1,5 +1,6 @@
 import './Filter.css';
 import { useContext, useEffect, useState } from 'react';
+import { LanguageContext } from '../../contexts/LanguageContext';
 import { AlertContext } from '../../contexts/AlertContext';
 import { UserContext } from '../../contexts/UserContext';
 import TagHandler from '../../handlers/tagHandler';
@@ -11,6 +12,7 @@ type FilterProps = {
 }
 
 function Filter(props: FilterProps) {
+    const { strings } = useContext(LanguageContext);
     const { setAlertContext } = useContext(AlertContext);
     const userContext = useContext(UserContext);
     const tagHandler = new TagHandler(userContext);
@@ -23,7 +25,7 @@ function Filter(props: FilterProps) {
             tagHandler.getAllTags().then(
                 (value: any) => {
                     let newAllFilters: string[] = [...value];
-                    setAllFilters([...newAllFilters, 'archived']);
+                    setAllFilters([...newAllFilters, strings.labels.archived]);
                     let newFilters = [...filters, ...newAllFilters.filter((f: string) => !allFilters.includes(f))];
                     setFilters(newFilters);
                     props.refreshFilters(newFilters);
@@ -63,7 +65,7 @@ function Filter(props: FilterProps) {
     }
 
     const noFiltersAppliedMessage = (
-        <label className='hor-ver-center-cnt'>Click on any amount of filters to get a specific subset of notes.</label>
+        <label className='hor-ver-center-cnt'>{strings.textContent.filterExplanation}</label>
     )
 
     return (

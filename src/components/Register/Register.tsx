@@ -101,27 +101,27 @@ function Register() {
       <div className='hor-ver-center-cnt'>
         <form noValidate onSubmit={handleSubmit} id='Register__form' className='card bg-light mb-3 hor-ver-center-cnt'>
           <div>
-            <h5 className='hor-ver-center-cnt'>Register</h5>
+            <h5 className='hor-ver-center-cnt'>{strings.labels.register}</h5>
             <br></br>
           </div>
           <div className='inpt-contnr hor-ver-center-cnt'>
             <div className='dflt-column hor-ver-center-cnt margin-right-10'>
               <label>
-                User name:
+                {strings.labels.userName}:
               </label>
               <br></br>
               <label className='margin-bottom-2'>
-                E-mail:
+              {strings.labels.email}:
               </label>
               <label>
-                Confirm e-mail:
+                {strings.labels.confirmEmail}:
               </label>
               <br></br>
               <label className='margin-bottom-2'>
-                Password:
+                {strings.labels.password}:
               </label>
               <label>
-                Confirm password:
+                {strings.labels.confirmPassword}:
               </label>
             </div>
             <div className='dflt-column hor-ver-center-cnt'>
@@ -166,7 +166,7 @@ function Register() {
           </div>
           <br></br>
           <div className='hor-ver-center-cnt'>
-            <button className='dflt-btn' type="submit">Accept</button>
+            <button className='dflt-btn' type="submit">{strings.labels.accept}</button>
           </div>
         </form>
       </div>

@@ -1,6 +1,7 @@
 import { FC, createContext, useState } from "react";
-import stringsEN from "../resources/constants/strings/EN";
-import stringsES from "../resources/constants/strings/ES";
+import stringsEN from "../constants/strings/EN";
+import stringsES from "../constants/strings/ES";
+import { values } from "../constants/values";
 
 type LanguageContextType = {
     language:string;
@@ -9,7 +10,7 @@ type LanguageContextType = {
 }
 
 class DefaultLanguageContext implements LanguageContextType {
-    language = "EN";
+    language = values.english;
     strings: any = {};
     setLanguage(language: string):void { };
 }
@@ -25,9 +26,9 @@ const LanguageContextProvider: FC<Props> = ({ children }) => {
 
     let strings = {};
 
-    if(language == "EN"){
+    if(language == values.english){
         strings = stringsEN;
-    }else if(language == "ES"){
+    }else if(language == values.spanish){
         strings = stringsES;
     }else{
         throw new Error;

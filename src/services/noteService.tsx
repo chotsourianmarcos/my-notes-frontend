@@ -1,7 +1,8 @@
 import ApiMyNotesService from "./apiMyNotesService";
+import { UserContextType } from "../contexts/UserContext";
 import NoteItem from "../models/entities/noteItem";
 import { AddUpdateNoteRequest, GetNotesByCriteriaRequest } from "../models/requests/noteRequests";
-import { UserContextType } from "../contexts/UserContext";
+
 
 class NoteService extends ApiMyNotesService {
     constructor(userContext:UserContextType){         

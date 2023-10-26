@@ -4,7 +4,7 @@
 }
 
 #Header__signature{
-    margin-left: 40px;
+    margin-left: 20px;
     font-family: 'Times New Roman', Times, serif;
     font-weight: 900;
     font-size: xx-large;
@@ -16,4 +16,20 @@
     font-family: 'Times New Roman', Times, serif;
     font-weight: 300;
     font-size: x-large;
+}
+
+#translate__contnr{
+    display: flex;
+    flex-direction: row;
+    margin-right: 10px;
+}
+
+#language__selector__dropd{
+    background-color: rgb(206, 239, 174);
+    border: none;
+}
+
+#translate__icon{
+    height: 24px;
+    width: 24px;
 }

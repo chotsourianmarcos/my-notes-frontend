@@ -6,6 +6,7 @@ import { UserContext } from '../../contexts/UserContext';
 import UserHandler from '../../handlers/userHandler';
 import LoginFormData from '../../models/forms/loginFormData';
 import { useNavigate } from 'react-router-dom';
+import { routes } from '../../constants/values';
 
 
 function Login() {
@@ -49,7 +50,7 @@ function Login() {
       function (value) {
         userContext.setLogActive(true);
         userContext.setUserData(value);
-        navigate("/notes")
+        navigate(routes.notes)
       },
       function (error) {
         setAlertContext(true, error.response.data.message.result, false, (accept: boolean) => { });
@@ -62,21 +63,21 @@ function Login() {
       <div className='hor-ver-center-cnt'>
         <form noValidate onSubmit={handleSubmit} id='Login__form' className='card bg-light mb-3 hor-ver-center-cnt'>
           <div>
-            <h5 className='hor-ver-center-cnt'>Login</h5>
+            <h5 className='hor-ver-center-cnt'>{strings.labels.login}</h5>
             <br></br>
           </div>
           <div className='inpt-contnr hor-ver-center-cnt'>
             <div className='dflt-column hor-ver-center-cnt margin-right-10'>
               <label>
-                User name:
+                {strings.labels.userName}:
               </label>
               <br></br>
               <label>
-                E-mail:
+                {strings.labels.email}:
               </label>
               <br></br>
               <label>
-                Password:
+                {strings.labels.password}:
               </label>
             </div>
             <div className='dflt-column hor-ver-center-cnt'>
@@ -105,7 +106,7 @@ function Login() {
           </div>
           <br></br>
           <div className='hor-ver-center-cnt'>
-            <button className='dflt-btn' type="submit">Accept</button>
+            <button className='dflt-btn' type="submit">{strings.labels.accept}</button>
           </div>
         </form>
       </div>

@@ -138,6 +138,10 @@ body,
     .exclude-mobile-res {
         display: none !important;
     }
+    *{
+        border-radius: 0% !important;
+    }
+
 }
 
 @media only screen and (min-width: 421px) and (max-width: 1199px){

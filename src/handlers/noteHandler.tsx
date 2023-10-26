@@ -1,9 +1,10 @@
+import { UserContextType } from "../contexts/UserContext";
 import NoteService from "../services/noteService";
 import NoteFilter from "../models/filters/noteFilter";
 import NoteItem from "../models/entities/noteItem";
 import UserItem from "../models/entities/userItem";
 import { AddUpdateNoteRequest, GetNotesByCriteriaRequest } from "../models/requests/noteRequests";
-import { UserContextType } from "../contexts/UserContext";
+import { values } from "../constants/values";
 
 class NoteHandler {
     user: UserItem;
@@ -22,18 +23,18 @@ class NoteHandler {
         let requestData = new GetNotesByCriteriaRequest();
         requestData.userIdWeb = filter.userIdWeb;
         if (filter.tagsIncluded.length == 0) {
-            requestData.tagsIncluded = "all";
+            requestData.tagsIncluded = values.allFilters;
         } else {
             let tagsString = "";
             filter.tagsIncluded.forEach((t) => {
                 if(t !== "archived"){
-                    tagsString += t + ",";
+                    tagsString += t + values.tagSeparator;
                 }
             });
             tagsString = tagsString.slice(0, -1);
             requestData.tagsIncluded = tagsString;
             if(!requestData.tagsIncluded){
-                requestData.tagsIncluded = "all";
+                requestData.tagsIncluded = values.allFilters;
             }
         }
         requestData.isArchived = filter.isArchived;
@@ -48,7 +49,7 @@ class NoteHandler {
         requestData.tagsNames = noteItem.tags.map((t) => t.name);
         requestData.isArchived = noteItem.isArchived;
 
-        let isNew = (noteItem.idWeb === '' || noteItem.idWeb === null || noteItem.idWeb === undefined) ? true : false;
+        let isNew = (noteItem.idWeb === "" || noteItem.idWeb === null || noteItem.idWeb === undefined) ? true : false;
 
         if (isNew) {
             return await this.noteService.addNote(requestData);

@@ -1,10 +1,14 @@
 import './Navbar.css';
 import { useContext } from 'react';
-import { UserContext } from '../../../contexts/UserContext';
 import { Link, Outlet } from "react-router-dom";
+import { LanguageContext } from '../../../contexts/LanguageContext';
+import { UserContext } from '../../../contexts/UserContext';
+import Header from '../Header/Header';
 import LoginResponseData from '../../../models/responses/loginResponseData';
+import { routes } from '../../../constants/values';
 
 function Nav() {
+  const { strings } = useContext(LanguageContext);
   const { isLogActive, user, setLogActive, setUserData } = useContext(UserContext);
 
   const logOut = () => {
@@ -15,18 +19,13 @@ function Nav() {
   const logItems = [
     {
       key: 0,
-      itemRoute: "/login/",
-      itemText: "Login",
+      itemRoute: routes.login,
+      itemText: strings.labels.login,
     },
     {
       key: 1,
-      itemRoute: "/register/",
-      itemText: "Register"
-    },
-    {
-      key: 2,
-      itemRoute: "/settings/",
-      itemText: "Settings"
+      itemRoute: routes.register,
+      itemText:strings.labels.register
     }
   ];
 
@@ -34,13 +33,8 @@ function Nav() {
     {
       key: 0,
       itemRoute: "/",
-      itemText: "Log out",
+      itemText: strings.labels.logOut,
       onClick: () => logOut()
-    },
-    {
-      key: 1,
-      itemRoute: "/settings/",
-      itemText: "Settings"
     }
   ];
 
@@ -55,7 +49,7 @@ function Nav() {
   )
   const loggedButtons = (
     <>
-      <h4 className='exclude-mobile-res'>Welcome {user.userName}</h4>
+      <h4 className='exclude-mobile-res'>{strings.labels.welcome + " " + user.userName}</h4>
       {loggedItems.map((i: any) => (
         <button key={i.key} className="dflt-btn nav-btn">
           <Link to={i.itemRoute} onClick={i.onClick}>{i.itemText}</Link>
@@ -71,6 +65,7 @@ function Nav() {
           <ul id='nav__btns__contnr'>
             {isLogActive ? loggedButtons : logButtons}
           </ul>
+          <Header isMobile={true} />
         </nav>
       </div>
       <div id="main__cnt__contnr">

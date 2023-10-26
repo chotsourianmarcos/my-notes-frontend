@@ -12,7 +12,7 @@ function Layout() {
   return (
     <div id="Layout__frm">
       <div id="Layout" className='frm-bor'>
-        <Header />
+        <Header isMobile={false} />
         <Nav />
         <div id="Footer__separator" className='exclude-mobile-res'>
         </div>

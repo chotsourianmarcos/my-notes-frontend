@@ -102,7 +102,7 @@ function Notes() {
   }
   const refreshFilters = (filters: string[]) => {
     let filter = new NoteFilter();
-    if (filters.includes("archived")) {
+    if (filters.includes(strings.labels.archived)) {
       filter.isArchived = true;
     }
     filter.tagsIncluded = filters;
@@ -122,11 +122,11 @@ function Notes() {
       </div>
     </div>
   );
-  const newNoteHTML = alertNote(strings.headers.newNote, strings.messages.addNoteMessage, createNewNote);
+  const newNoteHTML = alertNote(strings.labels.newNote, strings.messages.addNoteMessage, createNewNote);
   const emptyResultHTML = (
     <>
       {newNoteHTML}
-      {alertNote(strings.headers.emptyResult, strings.messages.noNotesFound, null)}
+      {alertNote(strings.labels.emptyResult, strings.messages.noNotesFound, null)}
     </>
   );
   let notesHTML = (
