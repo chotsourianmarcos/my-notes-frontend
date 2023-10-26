@@ -172,6 +172,8 @@ body,
     min-height: 100%;
     width: 1200px;
     background-color: rgb(206, 239, 174);
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
 
 #footer__separator {

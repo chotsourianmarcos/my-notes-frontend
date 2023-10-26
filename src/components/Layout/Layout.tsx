@@ -14,7 +14,7 @@ function Layout() {
       <div id="Layout" className='frm-bor'>
         <Header />
         <Nav />
-        <div id="footer__separator" className='exclude-mobile-res'>
+        <div id="Footer__separator" className='exclude-mobile-res'>
         </div>
         <Footer />
         <AlertModal { ...modalValues }/>

@@ -1,8 +1,14 @@
-#Footer-contnr {
+#Footer__contnr {
     position: absolute;
     bottom: 0;
     display: flex;
     justify-content: space-around;
     height: 60px;
     width: 100%;
+}
+
+#Footer__separator {
+    display: flex;
+    min-height: 60px;
+    min-width: 100%;
 }
