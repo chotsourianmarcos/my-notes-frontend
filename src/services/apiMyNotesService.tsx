@@ -11,7 +11,7 @@ class ApiMyNotesService {
         let currentToken = refreshToken.length > 0 ? refreshToken : userContext.user.refreshToken;
 
         var service = axios.create({
-            baseURL: 'https://localhost:7032',
+            baseURL: 'https://my-notes-mc-backend-fbe1ee92a1cf.herokuapp.com',
             withCredentials: false,
             headers: {
                 'Content-Type': 'application/json',
