@@ -6,7 +6,9 @@ const values = {
     allFilters: "all",
     tagSeparator: ",",
     bearerTokenIntro: "Bearer ",
-    expiredTokenPhrase: "Expired token"
+    expiredTokenPhrase: "Expired token",
+    userNotFoundPhrase: "Not existing user",
+    userWrongCredentials: "Wrong credentials"
 }
 
 const routes = {

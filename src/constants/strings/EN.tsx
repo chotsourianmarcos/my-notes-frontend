@@ -31,7 +31,9 @@ const stringsEN = {
         homeWelcome: "Welcome to My Notes!",
         devDelopedBy: "Developed by Marcos Chotsourian",
         devMailContact: "Contact: chotsourian.marcos@gmail.com",
-        headerPhrase: "Note. Tag. Filter. Work flowing, mind clear."
+        headerPhrase: "Note. Tag. Filter. Work flowing, mind clear.",
+        userNotFoundErrorMessage: "It does not exist an user for the given credentials.",
+        userWrongCredentialsErrorMessage: "Credentials are not valid for the given user."
     },
     alerts: {
         registrationSuccess: "Successful registration.",

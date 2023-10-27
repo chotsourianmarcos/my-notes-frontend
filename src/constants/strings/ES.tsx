@@ -31,7 +31,9 @@ const stringsES ={
         homeWelcome: "Bienvenido/a a My Notes!",
         devDelopedBy: "Desarrollado por Marcos Chotsourian",
         devMailContact: "Contacto: chotsourian.marcos@gmail.com",
-        headerPhrase: "Anote. Etiquete. Filtre. El trabajo fluye, la mente clara."
+        headerPhrase: "Anote. Etiquete. Filtre. El trabajo fluye, la mente clara.",
+        userNotFoundErrorMessage: "No existe un usuario para las credenciales brindadas.",
+        userWrongCredentialsErrorMessage: "Las credenciales no son válidas para el usuario ingresado."
     },
     alerts: {
         registrationSuccess: "Registro exitoso.",

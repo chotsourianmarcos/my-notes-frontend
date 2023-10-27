@@ -6,7 +6,7 @@ import { UserContext } from '../../contexts/UserContext';
 import UserHandler from '../../handlers/userHandler';
 import LoginFormData from '../../models/forms/loginFormData';
 import { useNavigate } from 'react-router-dom';
-import { routes } from '../../constants/values';
+import { routes, values } from '../../constants/values';
 
 
 function Login() {
@@ -53,7 +53,13 @@ function Login() {
         navigate(routes.notes)
       },
       function (error) {
-        setAlertContext(true, error.response.data.message.result, false, (accept: boolean) => { });
+        let errorMessage = error.response.data.ReasonPhrase;
+        if(errorMessage.includes(values.userNotFoundPhrase)){
+          errorMessage = strings.textContent.userNotFoundErrorMessage;
+        }else if(errorMessage.includes(values.userWrongCredentials)){
+          errorMessage = strings.textContent.userWrongCredentialsErrorMessage;
+        }
+        setAlertContext(true, errorMessage, false, (accept: boolean) => { });
       });
   }
 

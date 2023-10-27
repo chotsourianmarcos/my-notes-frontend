@@ -55,10 +55,12 @@ class ApiMyNotesService {
                                 throw error;
                             }
                         );
-                    };
+                    }else{
+                        functions.defaultCursor();
+                        throw error;
+                    }
                 } catch {
                     functions.defaultCursor();
-
                     throw error;
                 }
             }
